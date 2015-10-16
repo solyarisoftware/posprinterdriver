@@ -1,9 +1,9 @@
 Android POS Print Driver (ESC/POS)
 ==================================
-<img src="https://lh5.ggpht.com/oj7DSgpI4iY2BU_WQNhTejmxqQw5JjPeBv3i7ntFozBcptmtSHH0KIXDNoE-uQkw-VA=w300" alt="logo">
-
 >Print easy, from your android device, in just 1 minute!
 >Print direct from web or print from other web direct to a sinc printer linked in an Android device!
+
+<img src="https://lh5.ggpht.com/oj7DSgpI4iY2BU_WQNhTejmxqQw5JjPeBv3i7ntFozBcptmtSHH0KIXDNoE-uQkw-VA=w300" alt="logo">
 
 ## Introduction
 
@@ -11,7 +11,7 @@ In this way Luis Blatta introduce his beautiful Android application that acts as
 The powerfull of the deriver is that allow three different network interfaces between your phone/tablet and the printer using a wired or wireless connection allowed by your printer: 
 
 * USB cable 
-* WIFI 
+* TCP/WIFI 
 * Bluethoot
 
 But this app excel for another reason so important for developers: with this driver developer can print with three different paradigmas: 
@@ -22,30 +22,30 @@ But this app excel for another reason so important for developers: with this dri
 
 You can download Pos Printer Driver Android app from Google Play [here](https://play.google.com/store/apps/details?id=com.fidelier.posprinterdriver).
 
-This repository isn't a standard project, I admit, but more a collection of notes, tests and small chunks of code to explain better the features of the app. 
+> This repository isn't a standard project, I admit, but more a collection of notes, tests and small chunks of code to explain better the features of the app. 
 
 
 ## Features Detail
 Simple driver app to interface ESC/POS printer with threee different network interface!
 
-* ### TCP/WIFI
+* ### POS network printer, TCP (ethernet cable interface) or WIFI (wireless interface)
 Input the printer’s IP and port it’s running on. 
 Consult your printer manufacturers set up instructions to configure the printer’s TCP settings. This will likely need to be done through a other software.
 
-* ### USB cable
+* ### POS printer with USB cable interface
 Just plug your printer into your devices. 
 Accept permission for the driver to access the USB device. 
 Choose which printer you’d like to print to in the drop down box.
 
-* ### BLUETOOTH
+* ### POS printer with Bluethoot wireless interface
 Just pair your printer into your devices. 
 Accept permission for the driver to access the device. 
 Choose which printer you’d like to print to in the drop down box. 
 Test the connection and Click Save when satisfied. Test from your app.
 
 
-Local and remote printing
--------------------------
+Local app vs remote server printing
+-----------------------------------
 
 ### Print from your Android App (interactive user action)
 
@@ -82,7 +82,7 @@ a href="com.fidelier.printfromweb://$biguhw$Print From Web$intro$$small$Print sm
 
 ```
 
-### Remote Server API Interface Through PosPrinterServer Cloud Server!
+### PosPrinterServer Cloud Server Remote API !
 
 ```
    Your App Beck-end Server
@@ -92,7 +92,7 @@ a href="com.fidelier.printfromweb://$biguhw$Print From Web$intro$$small$Print sm
        |             |
        |             |
        .------|------.
-              | HTTP GET/POST 
+              | HTTP GET/POST API
               |
               |       Pos Printer Driver 
               |          Cloud Server         device 1  
@@ -178,24 +178,31 @@ ESC_POS_DATA is a string containing ESC/POS commands represented by $symbol$ spe
 * DOT_ENCODING
 This is a more versatile, complete solution for URL-encode any ESC/POS command: 
 developer must represent each 'non printable' char with a special encoding, enclosing the decimal representation of the code with special sign `▪` (%C2%B7 URL-encoded), so by example
-** the char with decimal value 27 become ▪27▪, 
-** and ESC/POS escape sequence to cut the paper 'ESC m', is equal to 1B6D in hexadecimal and is equal to 27 109 in decimal, become:
+ * the char with decimal value 27 become ▪27▪, 
+ * and ESC/POS escape sequence to cut the paper 'ESC m', is equal to 1B6D in hexadecimal and is equal to 27 109 in decimal, become:
 `▪27▪▪109▪`
-** at least the complete string to cut the paper is: `▪27▪▪109▪▪13▪▪10▪`
+ * at least the complete string to cut the paper is: `▪27▪▪109▪▪13▪▪10▪`
 
 
 My Test Environment
 -------------------
 Android Samsung Galaxy S2 (Android v. 4.2.2) connected phisically (through an USB cable/adapter) with the great thank Epson TM-T20 printer.
 
+To do
+-----
+- [x] introduction
+- [ ] publish a web page example
+- [ ] publish a remote server API example using Ruby
+- [ ] publish a Ruby function that translate from a text stream containing ESC/POS codes to  URL-encoding compliant with the Blatta's APIs.
 
-Business Model
+
+
+Business Usage
 --------------
 Please contact [Luis Blatta](mailto:luis.blatta.com) Pos Printer Driver app owner. 
 
 
 Contacts
 --------
-Author of this readme [e-mail](mailto:giorgio.robino@gmail.com), [twitter](http://www.twitter.com/solyarisoftware)
-
-Owner of the app [Luis Blatta](mailto:luis.blatta.com), [web](http://www.posprinterdriver.com)
+Author of this repository [e-mail](mailto:giorgio.robino@gmail.com), [twitter](http://www.twitter.com/solyarisoftware)
+Owner of the app [e-mail](mailto:luis.blatta.com), [web](http://www.posprinterdriver.com)
