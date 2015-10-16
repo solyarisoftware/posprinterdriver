@@ -1,34 +1,51 @@
 Android POS Print Driver (ESC/POS)
 ==================================
-
-Download Pos Printer Driver Android app from Google Play [here](https://play.google.com/store/apps/details?id=com.fidelier.posprinterdriver).
 <img src="https://lh5.ggpht.com/oj7DSgpI4iY2BU_WQNhTejmxqQw5JjPeBv3i7ntFozBcptmtSHH0KIXDNoE-uQkw-VA=w300" alt="logo">
-Print easy, from your android device, in just 1 minute!
-Print direct from web or print from other web direct to a sinc printer linked in an Android device!
+
+>Print easy, from your android device, in just 1 minute!
+>Print direct from web or print from other web direct to a sinc printer linked in an Android device!
+
+## Introduction
+
+In this way Luis Blatta introduce his beautiful Android application that acts asa a printer driver for ESC/POS printers (so called "POS" printers): roll paper thermal printers.
+The powerfull of the deriver is that allow three different network interfaces between your phone/tablet and the printer using a wired or wireless connection allowed by your printer: 
+
+* USB cable 
+* WIFI 
+* Bluethoot
+
+But this app excel for another reason so important for developers: with this driver developer can print with three different paradigmas: 
+
+* inside a custom Android app, using usual Android "intents"
+* inside a normal web page visualized in the handset browser
+* from a remote cloud server 
+
+You can download Pos Printer Driver Android app from Google Play [here](https://play.google.com/store/apps/details?id=com.fidelier.posprinterdriver).
+
+This repository isn't a standard project, I admit, but more a collection of notes, tests and small chunks of code to explain better the features of the app. 
 
 
-## Features 
+## Features Detail
 Simple driver app to interface ESC/POS printer with threee different network interface!
 
-### TCP/WIFI
+* ### TCP/WIFI
 Input the printer’s IP and port it’s running on. 
 Consult your printer manufacturers set up instructions to configure the printer’s TCP settings. This will likely need to be done through a other software.
 
-### USB
+* ### USB cable
 Just plug your printer into your devices. 
 Accept permission for the driver to access the USB device. 
 Choose which printer you’d like to print to in the drop down box.
 
-
-### BLUETOOTH
+* ### BLUETOOTH
 Just pair your printer into your devices. 
 Accept permission for the driver to access the device. 
 Choose which printer you’d like to print to in the drop down box. 
 Test the connection and Click Save when satisfied. Test from your app.
 
 
-REMOTE / LOCAL PRINT
---------------------
+Local and remote printing
+-------------------------
 
 ### Print from your Android App (interactive user action)
 
@@ -68,45 +85,43 @@ a href="com.fidelier.printfromweb://$biguhw$Print From Web$intro$$small$Print sm
 ### Remote Server API Interface Through PosPrinterServer Cloud Server!
 
 ```
-
    Your App Beck-end Server
               |
               v
        .-------------.
        |             |
        |             |
-       .-------------.
-              |
+       .------|------.
               | HTTP GET/POST 
               |
-              |
-              |         Pos Printer Driver 
-              |            Cloud Server  
-              |                |                                                  
-              |                v                                             
-              |         .-------------.
-              .-------> |             |--> device 1 -> ESC/POS printer (e.g. Bluethoot)
-                        |             |
-                        |             |--> device 2 -> ESC/POS printer (e.g. WIFI)
-                        |             |           
-                        |             |--> device N -> ESC/POS printer (e.g. USB)
-                        .-------------.                                              
-
-
+              |       Pos Printer Driver 
+              |          Cloud Server         device 1  
+              |              |         .-------------.                                       
+              |              v         | your app    |                            
+              |         .---------.    | |           |       Bluethoot
+              .-------> |         |--> | .--> driver | ----------------> ESC/POS printer 1
+                        |         |    |             |
+                        |         |    .-------------.
+                        |         |                               
+                        |         |                               WIFI
+                        |         |--> device 2 -----------------------> ESC/POS printer 2
+                        |         |                               
+                        |         |                               
+                        |         |                                USB
+                        |         |--> device N -----------------------> ESC/POS printer N
+                        .---------.                                              
 ```
 
+You need to initially configure the app:
 
+- Download Pos Printer Driver Android app from Google Play [here](https://play.google.com/store/apps/details?id=com.fidelier.posprinterdriver).
+- Register your printer pushing the ´register´ button.
+- Make a call to the GET/POST HTTP API endpoint:
 
-
-You need to initially configure the app
-1. Download Pos Printer Driver Android app from Google Play [here](https://play.google.com/store/apps/details?id=com.fidelier.posprinterdriver).
-2. Register your printer pushing the ´register´ button.
-3.- Make a call to the GET/POST HTTP API endpoint:
-
- <DEVICE_ID> = XXXXX your device ID ("link code")
+ `DEVICE_ID ` = XXXXX your device ID ("link code")
 
 `
-http://www.posprinterdriver.com/api/v1/api/sendDataToPrinter?linkcode=<DEVICE_ID>&data=HelloWorld$intro$ 
+http://www.posprinterdriver.com/api/v1/api/sendDataToPrinter?linkcode=DEVICE_ID&data=ESC_POS_DATA 
 `
 
 So suppose your DEVICE_ID code is "12345" and the ESC_POS_DATA string is the string "HelloWorld$intro$".
@@ -129,12 +144,14 @@ $ curl -X POST http://www.posprinterdriver.com/api/v1/api/sendDataToPrinter? \
 
 ESC/POS URL-encoding
 --------------------
+An ESC/POS printers get a stream of text embedding some "escape" formatting code, following the ESC/POS "standard" original defined by Epson.
+The problem is that ESC codes contains are also non printable chars. To URL-encode ESC/POS commands, Luis Blatta propose two solutions:
 
-Open and close a tag
-Include helpers for ESC commands like
-Easy font size selection.
+* DOLLAR_SIGN_ENCODING
+ESC_POS_DATA is a string containing ESC/POS commands represented by $symbol$ specified by the following table:
 
-| Escape code  | Description
+
+| $ Escape code  | Description
 | ------------ |------------------------------------| 
 |$small$       | small size|
 |$smallh$       | small size with double hight
@@ -158,21 +175,27 @@ Easy font size selection.
 |$cut$ | cut the paper
 |$drawer$ | open the first drawer
 
+* DOT_ENCODING
+This is a more versatile, complete solution for URL-encode any ESC/POS command: 
+developer must represent each 'non printable' char with a special encoding, enclosing the decimal representation of the code with special sign `▪` (%C2%B7 URL-encoded), so by example
+** the char with decimal value 27 become ▪27▪, 
+** and ESC/POS escape sequence to cut the paper 'ESC m', is equal to 1B6D in hexadecimal and is equal to 27 109 in decimal, become:
+`▪27▪▪109▪`
+** at least the complete string to cut the paper is: `▪27▪▪109▪▪13▪▪10▪`
 
-MY TEST ENVIRONMENT
+
+My Test Environment
 -------------------
 Android Samsung Galaxy S2 (Android v. 4.2.2) connected phisically (through an USB cable/adapter) with the great thank Epson TM-T20 printer.
 
 
-BUSINESS MODEL
+Business Model
 --------------
-Free version could print ads on your ticket
+Please contact [Luis Blatta](mailto:luis.blatta.com) Pos Printer Driver app owner. 
 
 
-CONTACTS
+Contacts
 --------
-Author of this readme e-mail: [giorgio.robino@gmail.com](mailto:giorgio.robino@gmail.com)
-twitter: [@solyarisoftware](http://www.twitter.com/solyarisoftware)
+Author of this readme [e-mail](mailto:giorgio.robino@gmail.com), [twitter](http://www.twitter.com/solyarisoftware)
 
-[luis@blatta.com](mailto:luis.blatta.com)
-[home page](http://www.posprinterdriver.com)
+Owner of the app [Luis Blatta](mailto:luis.blatta.com), [web](http://www.posprinterdriver.com)
