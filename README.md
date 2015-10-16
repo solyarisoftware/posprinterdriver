@@ -76,9 +76,7 @@ Print from a wab page visualized in an android device web browser.
 Just embed in you page a link, or a button:
 
 ```
-
 a href="com.fidelier.printfromweb://$biguhw$Print From Web$intro$$small$Print small letter$intro$->$intro$->$intro$->$intro$$intro$$intro$$intro$$cut$$intro$"Test print from web/a
-
 
 ```
 
@@ -151,37 +149,100 @@ The problem is that ESC codes contains are also non printable chars. To URL-enco
 ESC_POS_DATA is a string containing ESC/POS commands represented by $symbol$ specified by the following table:
 
 
-| $ Escape code  | Description
-| ------------ |------------------------------------| 
-|$small$       | small size|
-|$smallh$       | small size with double hight
-|$smallw$ | small size with double width
-|$smallhw$ | small size with double hight and width
-|$smallu$ | small size underline
-|$smalluh$ | small size with double hight underline
-|$smalluw$ | small size with double width underline
-|$smalluhw$ | small size with double hight and width underline
-|  |   | 
-|$big$ | big size
-|$bigh$ | big size with double hight
-|$bigw$ | big size with double width
-|$bighw$ | big size with double hight and width
-|  |   | 
-|$big$ | big size, underline
-|$bigh$ | big size with double hight, underline
-|$bigw$ | big size with double width, underline
-|$bighw$ | big size with double hight and width, underline
-|  |   | 
-|$cut$ | cut the paper
-|$drawer$ | open the first drawer
+  | $ Escape code  | Description
+  | ------------ |------------------------------------| 
+  |$small$       | small size|
+  |$smallh$       | small size with double hight
+  |$smallw$ | small size with double width
+  |$smallhw$ | small size with double hight and width
+  |$smallu$ | small size underline
+  |$smalluh$ | small size with double hight underline
+  |$smalluw$ | small size with double width underline
+  |$smalluhw$ | small size with double hight and width underline
+  |  |   | 
+  |$big$ | big size
+  |$bigh$ | big size with double hight
+  |$bigw$ | big size with double width
+  |$bighw$ | big size with double hight and width
+  |  |   | 
+  |$big$ | big size, underline
+  |$bigh$ | big size with double hight, underline
+  |$bigw$ | big size with double width, underline
+  |$bighw$ | big size with double hight and width, underline
+  |  |   | 
+  |$cut$ | cut the paper
+  |$drawer$ | open the first drawer
 
 * DOT_ENCODING
 This is a more versatile, complete solution for URL-encode any ESC/POS command: 
 developer must represent each 'non printable' char with a special encoding, enclosing the decimal representation of the code with special sign `▪` (%C2%B7 URL-encoded), so by example
- * the char with decimal value 27 become ▪27▪, 
- * and ESC/POS escape sequence to cut the paper 'ESC m', is equal to 1B6D in hexadecimal and is equal to 27 109 in decimal, become:
+  * the char with decimal value 27 become ▪27▪, 
+  * and ESC/POS escape sequence to cut the paper 'ESC m', is equal to 1B6D in hexadecimal and is equal to 27 109 in decimal, become:
 `▪27▪▪109▪`
- * at least the complete string to cut the paper is: `▪27▪▪109▪▪13▪▪10▪`
+  * at least the complete string to cut the paper is: `▪27▪▪109▪▪13▪▪10▪`
+
+
+Examples
+--------
+Let consider an interesting example: you want to print this receipt of an ecommerce order:
+
+`
+ordine 20
+del 10-10-2015 alle ore 10:00
+pizzeria d'albertis (cod. 663)
+
+1 pizze
+01 x capresina                   6.50
+
+2 bibite
+01 x coca cola                   1.50
+01 x mezza gassata               0.50
+-------------------------------------
+confezionamento per asporto      0.50
+fattorino a domicilio            1.00
+totale euro                     10.00
+-------------------------------------
+
+consegna a domicilio
+10-10-2015             alle ore 13:30
+
+Caterina de Michel
+salita san giorgio 6/9
+16100 genova
+tel. 1234567901
+`
+
+using the mode A encoding, to print the above text with a final paper cut also: 
+
+```bash
+$ curl -X POST http://www.posprinterdriver.com/api/v1/api/sendDataToPrinter? \
+               linkcode=12345&data=\
+ordine 20\
+del 10-10-2015 alle ore 10:00\
+pizzeria d'albertis (cod. 663)\
+\
+1 pizze\
+01 x capresina                   6.50\
+\
+2 bibite\
+01 x coca cola                   1.50\
+01 x mezza gassata               0.50\
+-------------------------------------\
+confezionamento per asporto      0.50\
+fattorino a domicilio            1.00\
+totale euro                     10.00\
+-------------------------------------\
+\
+consegna a domicilio\
+10-10-2015             alle ore 13:30\
+\
+Caterina de Michel\
+salita san giorgio 6/9\
+16100 genova\
+tel. 1234567901\
+\
+\$intro$ 
+```
 
 
 My Test Environment
