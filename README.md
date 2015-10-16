@@ -3,8 +3,6 @@ Android POS Print Driver (ESC/POS)
 >Print easy, from your android device, in just 1 minute!
 >Print direct from web or print from other web direct to a sinc printer linked in an Android device!
 
-<img src="https://lh5.ggpht.com/oj7DSgpI4iY2BU_WQNhTejmxqQw5JjPeBv3i7ntFozBcptmtSHH0KIXDNoE-uQkw-VA=w300" alt="logo">
-
 ## Introduction
 
 In this way Luis Blatta introduce his beautiful Android application that acts asa a printer driver for ESC/POS printers (so called "POS" printers): roll paper thermal printers.
@@ -42,7 +40,7 @@ Just pair your printer into your devices.
 Accept permission for the driver to access the device. 
 Choose which printer you’d like to print to in the drop down box. 
 Test the connection and Click Save when satisfied. Test from your app.
-
+<img src="https://lh5.ggpht.com/oj7DSgpI4iY2BU_WQNhTejmxqQw5JjPeBv3i7ntFozBcptmtSHH0KIXDNoE-uQkw-VA=w300" alt="logo">
 
 Local app vs remote server printing
 -----------------------------------
@@ -146,7 +144,8 @@ An ESC/POS printers get a stream of text embedding some "escape" formatting code
 The problem is that ESC codes contains are also non printable chars. To URL-encode ESC/POS commands, Luis Blatta propose two solutions:
 
 * DOLLAR_SIGN_ENCODING
-ESC_POS_DATA is a string containing ESC/POS commands represented by $symbol$ specified by the following table:
+
+    ESC_POS_DATA is a string containing ESC/POS commands represented by $symbol$ specified by the following table:
 
 
   | $ Escape code  | Description
@@ -174,7 +173,8 @@ ESC_POS_DATA is a string containing ESC/POS commands represented by $symbol$ spe
   |$drawer$ | open the first drawer
 
 * DOT_ENCODING
-This is a more versatile, complete solution for URL-encode any ESC/POS command: 
+
+    This is a more versatile, complete solution for URL-encode any ESC/POS command: 
 developer must represent each 'non printable' char with a special encoding, enclosing the decimal representation of the code with special sign `▪` (%C2%B7 URL-encoded), so by example
   * the char with decimal value 27 become ▪27▪, 
   * and ESC/POS escape sequence to cut the paper 'ESC m', is equal to 1B6D in hexadecimal and is equal to 27 109 in decimal, become:
@@ -186,8 +186,9 @@ Examples
 --------
 Let consider an interesting example: you want to print this receipt of an ecommerce order:
 
-`
-ordine 20
+```
+
+ORDINE 20
 del 10-10-2015 alle ore 10:00
 pizzeria d'albertis (cod. 663)
 
@@ -210,14 +211,15 @@ Caterina de Michel
 salita san giorgio 6/9
 16100 genova
 tel. 1234567901
-`
+
+```
 
 using the mode A encoding, to print the above text with a final paper cut also: 
 
-```bash
+```
 $ curl -X POST http://www.posprinterdriver.com/api/v1/api/sendDataToPrinter? \
                linkcode=12345&data=\
-ordine 20\
+ORDINE 20\
 del 10-10-2015 alle ore 10:00\
 pizzeria d'albertis (cod. 663)\
 \
