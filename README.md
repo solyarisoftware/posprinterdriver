@@ -262,13 +262,10 @@ To do
 - [ ] publish a Ruby function that translate from a text stream containing ESC/POS codes to  URL-encoding compliant with the Blatta's APIs.
 
 
-
-Business Usage
---------------
-Please contact [Pos Printer Driver app owner](mailto:luis.blatta.com). 
-
-
 Contacts
 --------
-- Author of this README/tutorial repository [e-mail](mailto:giorgio.robino@gmail.com), [twitter](http://www.twitter.com/solyarisoftware)
-- Owner of the app [e-mail](mailto:luis.blatta.com), [web](http://www.posprinterdriver.com)
+- Android App - Business Usage
+  Please contact Pos Printer Driver app owner: [e-mail](mailto:luis.blatta.com), [web](http://www.posprinterdriver.com)
+
+- Author of this "tutorial" page [e-mail](mailto:giorgio.robino@gmail.com), [twitter](http://www.twitter.com/solyarisoftware)
+
