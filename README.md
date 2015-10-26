@@ -3,6 +3,10 @@ Android POS Print Driver (ESC/POS)
 >Print easy, from your android device, in just 1 minute!
 >Print direct from web or print from other web direct to a sinc printer linked in an Android device!
 
+<center>
+<img src="https://lh5.ggpht.com/oj7DSgpI4iY2BU_WQNhTejmxqQw5JjPeBv3i7ntFozBcptmtSHH0KIXDNoE-uQkw-VA=w300" alt="logo">
+</center>
+
 ## Introduction
 
 In this way Luis Blatta introduce his beautiful Android application that acts asa a printer driver for ESC/POS printers (so called "POS" printers): roll paper thermal printers.
@@ -40,8 +44,6 @@ Just pair your printer into your devices.
 Accept permission for the driver to access the device. 
 Choose which printer you’d like to print to in the drop down box. 
 Test the connection and Click Save when satisfied. Test from your app.
-
-<img src="https://lh5.ggpht.com/oj7DSgpI4iY2BU_WQNhTejmxqQw5JjPeBv3i7ntFozBcptmtSHH0KIXDNoE-uQkw-VA=w300" alt="logo">
 
 Local app vs remote server printing
 -----------------------------------
