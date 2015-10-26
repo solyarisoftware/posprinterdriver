@@ -40,6 +40,7 @@ Just pair your printer into your devices.
 Accept permission for the driver to access the device. 
 Choose which printer you’d like to print to in the drop down box. 
 Test the connection and Click Save when satisfied. Test from your app.
+
 <img src="https://lh5.ggpht.com/oj7DSgpI4iY2BU_WQNhTejmxqQw5JjPeBv3i7ntFozBcptmtSHH0KIXDNoE-uQkw-VA=w300" alt="logo">
 
 Local app vs remote server printing
@@ -262,10 +263,10 @@ To do
 
 Business Usage
 --------------
-Please contact [Luis Blatta](mailto:luis.blatta.com) Pos Printer Driver app owner. 
+Please contact [Pos Printer Driver app owner](mailto:luis.blatta.com). 
 
 
 Contacts
 --------
-Author of this repository [e-mail](mailto:giorgio.robino@gmail.com), [twitter](http://www.twitter.com/solyarisoftware)
-Owner of the app [e-mail](mailto:luis.blatta.com), [web](http://www.posprinterdriver.com)
+- Author of this README/tutorial repository [e-mail](mailto:giorgio.robino@gmail.com), [twitter](http://www.twitter.com/solyarisoftware)
+- Owner of the app [e-mail](mailto:luis.blatta.com), [web](http://www.posprinterdriver.com)
