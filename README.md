@@ -10,7 +10,7 @@ Android POS Print Driver (ESC/POS)
 ## Introduction
 
 In this way Luis Blatta introduce his beautiful Android application that acts asa a printer driver for ESC/POS printers (so called "POS" printers): roll paper thermal printers.
-The powerfull of the deriver is that allow three different network interfaces between your phone/tablet and the printer using a wired or wireless connection allowed by your printer: 
+The powerful of the deriver is that allow three different network interfaces between your phone/tablet and the printer using a wired or wireless connection allowed by your printer: 
 
 * USB cable 
 * TCP/WIFI 
