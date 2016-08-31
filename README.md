@@ -265,7 +265,7 @@ To do
 Contacts
 --------
 - Android App - Business Usage
-  Please contact Pos Printer Driver app owner: [e-mail](mailto:luis.blatta.com), [web](http://www.posprinterdriver.com)
+  Please contact Pos Printer Driver app owner: [e-mail](mailto:luis@blatta.com), [web](http://www.posprinterdriver.com)
 
 - Author of this "tutorial" page [e-mail](mailto:giorgio.robino@gmail.com), [twitter](http://www.twitter.com/solyarisoftware)
 
